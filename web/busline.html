@@ -1,0 +1,50 @@
+<!DOCTYPE html>  
+        <html>  
+    <head>  
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+        <meta http-equiv="Content-Type" content="text/html; chartset=utf-8" />  
+        <title>busline</title>  
+        <style type="text/css">  
+            html {  
+                height: 100%  
+            }  
+            body {  
+                height:100%;  
+                margin:0px;  
+                padding:0px;  
+            }  
+            #container {  
+                height:100%;  
+            }  
+        </style>  
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>  
+    </head>  
+  
+    <body>
+		<div id="l-map"></div>
+	<div id="r-result"></div>
+    </body>  
+</html>  
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("l-map");            // 创建Map实例
+	//map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+	map.centerAndZoom(new BMap.Point(121.450, 31.244), 12);//121.450916,31.24495
+
+	var busline = new BMap.BusLineSearch(map,{
+		renderOptions:{map:map,panel:"r-result"},
+			onGetBusListComplete: function(result){
+			   if(result) {
+				 var fstLine = result.getBusListItem(0);//获取第一个公交列表显示到map上
+				 busline.getBusLine(fstLine);
+			   }
+			}
+	});
+	function busSearch(){
+		var busName = 11;
+		busline.getBusList(busName);
+	}
+	setTimeout(function(){
+		busSearch();
+	},1500);
+</script>
