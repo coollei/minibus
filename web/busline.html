@@ -9,32 +9,12 @@
 		#r-result {width:100%;}
 	</style>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+	<script type="text/javascript" src="./busline.js"></script>
 	<title>公交/地铁线路查询</title>
 </head>
 <body>
 	<div id="l-map"></div>
 	<div id="r-result"></div>
+	<button onclick="f_busline()">试一下</button>
 </body>
 </html>
-<script type="text/javascript">
-	// 百度地图API功能
-	var map = new BMap.Map("l-map");            // 创建Map实例
-	map.centerAndZoom("上海", 12);
-
-	var busline = new BMap.BusLineSearch(map,{
-		renderOptions:{map:map,panel:"r-result"},
-			onGetBusListComplete: function(result){
-			   if(result) {
-				 var fstLine = result.getBusListItem(0);//获取第一个公交列表显示到map上
-				 busline.getBusLine(fstLine);
-			   }
-			}
-	});
-	function busSearch(){
-		var busName = 21;
-		busline.getBusList(busName);
-	}
-	setTimeout(function(){
-		busSearch();
-	},1500);
-</script>
