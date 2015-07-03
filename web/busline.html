@@ -1,35 +1,25 @@
-<!DOCTYPE html>  
-        <html>  
-    <head>  
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
-        <meta http-equiv="Content-Type" content="text/html; chartset=utf-8" />  
-        <title>busline</title>  
-        <style type="text/css">  
-            html {  
-                height: 100%  
-            }  
-            body {  
-                height:100%;  
-                margin:0px;  
-                padding:0px;  
-            }  
-            #container {  
-                height:100%;  
-            }  
-        </style>  
-        <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>  
-    </head>  
-  
-    <body>
-		<div id="l-map"></div>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#l-map{height:300px;width:100%;}
+		#r-result {width:100%;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+	<title>公交/地铁线路查询</title>
+</head>
+<body>
+	<div id="l-map"></div>
 	<div id="r-result"></div>
-    </body>  
-</html>  
+</body>
+</html>
 <script type="text/javascript">
 	// 百度地图API功能
 	var map = new BMap.Map("l-map");            // 创建Map实例
-	//map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
-	map.centerAndZoom(new BMap.Point(121.450, 31.244), 12);//121.450916,31.24495
+	map.centerAndZoom("上海", 12);
 
 	var busline = new BMap.BusLineSearch(map,{
 		renderOptions:{map:map,panel:"r-result"},
@@ -41,7 +31,7 @@
 			}
 	});
 	function busSearch(){
-		var busName = 11;
+		var busName = 21;
 		busline.getBusList(busName);
 	}
 	setTimeout(function(){
